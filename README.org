@@ -1,0 +1,18 @@
+* Pass Utils
+:PROPERTIES:
+:ID:       A0662DC0-79DE-4FF3-B93C-7A12E9921070
+:END:
+Simple utility for accessing the pass password manager from Python.
+
+** Usage
+:PROPERTIES:
+:ID:       2E95FE7F-465E-4CDD-947D-46436A90A5A5
+:END:
+
+#+begin_src python
+import get_pass_value
+
+api_key = get_pass_value("service/api-key", "key")
+username = get_pass_value("service/api-key", "user")
+#+end_src
+
