@@ -1,18 +1,68 @@
 * Pass Utils
 :PROPERTIES:
-:ID:       A0662DC0-79DE-4FF3-B93C-7A12E9921070
+:CUSTOM_ID: pass-utils
+:ID:       CEAB70CF-8796-47A8-B4FE-E2AB59C61C2E
 :END:
-Simple utility for accessing the pass password manager from Python.
+Simple utilities for accessing the pass password manager from Python.
+
+** Installation
+:PROPERTIES:
+:CUSTOM_ID: installation
+:ID:       FA27A320-7801-4880-92AE-DEF3002CF320
+:END:
+#+begin_src sh
+# For development (editable mode)
+pip install -e path/to/pass-utils
+
+# For regular installation
+pip install path/to/pass-utils
+#+end_src
 
 ** Usage
 :PROPERTIES:
-:ID:       2E95FE7F-465E-4CDD-947D-46436A90A5A5
+:CUSTOM_ID: usage
+:ID:       4E3823EC-9610-48EE-9580-057EF474EA29
 :END:
-
 #+begin_src python
-import get_pass_value
+from pass_utils import get_pass_value
 
+# Get the password (first line of pass entry)
+password = get_pass_value("service/api-key")
+
+# Get specific fields
 api_key = get_pass_value("service/api-key", "key")
 username = get_pass_value("service/api-key", "user")
 #+end_src
 
+** Examples
+:PROPERTIES:
+:CUSTOM_ID: examples
+:ID:       33691E35-4013-47B8-8831-2FA95EF1FB78
+:END:
+*** Getting API credentials
+:PROPERTIES:
+:CUSTOM_ID: getting-api-credentials
+:ID:       26704FA5-BEFC-438E-9301-EE3C114C008E
+:END:
+#+begin_src python
+from pass_utils import get_pass_value
+
+# Get OpenAI API key
+api_key = get_pass_value("apis/openai", "key")
+
+# Get a password
+github_password = get_pass_value("accounts/github")
+
+# Get username and token
+github_user = get_pass_value("accounts/github", "user")
+github_token = get_pass_value("accounts/github", "token")
+#+end_src
+
+** Notes
+:PROPERTIES:
+:CUSTOM_ID: notes
+:ID:       4D6709E5-BE1A-4A8A-9E8B-187848EA6791
+:END:
+- The function automatically removes trailing newlines from the returned values
+- When no field is specified, it returns the first line (the password)
+- For fields, the format in pass should be =field: value=
